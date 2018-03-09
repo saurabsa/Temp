@@ -1,0 +1,11 @@
+FROM microsoft/aspnetcore-build:2.0
+ENV ASPNETCORE_ENVIRONMENT=Development
+EXPOSE 80
+
+WORKDIR /src
+COPY cs-app1.csproj .
+RUN dotnet restore
+COPY . .
+RUN dotnet build
+
+CMD ["dotnet", "run", "--no-restore", "--no-build", "--no-launch-profile"]
