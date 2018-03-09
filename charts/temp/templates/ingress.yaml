@@ -1,12 +1,12 @@
 {{- if .Values.ingress.enabled -}}
-{{- $serviceName := include "cs-app1.servicename" . -}}
+{{- $serviceName := include "temp.servicename" . -}}
 {{- $servicePort := .Values.service.externalPort -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{ template "cs-app1.fullname" . }}
+  name: {{ template "temp.fullname" . }}
   labels:
-    app: {{ template "cs-app1.name" . }}
+    app: {{ template "temp.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}

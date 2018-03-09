@@ -1,9 +1,9 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ template "cs-app1.fullname" . }}
+  name: {{ template "temp.fullname" . }}
   labels:
-    app: {{ template "cs-app1.name" . }}
+    app: {{ template "temp.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ template "cs-app1.name" . }}
+        app: {{ template "temp.name" . }}
         release: {{ .Release.Name }}
     spec:
       containers:
@@ -28,7 +28,7 @@ spec:
             - name: {{ $ref | upper }}_{{ $key | upper }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "cs-app1.fullname" $root }}-{{ $ref }}
+                  name: {{ template "temp.fullname" $root }}-{{ $ref }}
                   key: {{ $key }}
             {{- end }}
             {{- end }}

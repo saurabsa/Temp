@@ -2,17 +2,17 @@ kind: helm-release
 build:
   context: .
 install:
-  chart: charts/cs-app1
+  chart: charts/temp
   set:
     image:
       tag: $(tag)
       pullPolicy: Never
     # This ingress section specifies whether VSCE should expose a secure
-    # public development endpoint like https://cs-app1-myenv.vsce.io
-    ingress:
-      enabled: true
-      annotations:
-        kubernetes.io/ingress.class: vsce
+    # public development endpoint like https://temp-myenv.vsce.io
+    # ingress:
+    #   enabled: true
+    #   annotations:
+    #     kubernetes.io/ingress.class: vsce
 configurations:
   develop:
     build:
@@ -24,3 +24,9 @@ configurations:
       - "**/Pages/**"
       - "**/Views/**"
       - "**/wwwroot/**"
+      - "!**/*.{sln,csproj}"
+      iterate:
+        processesToKill: 
+        - dotnet
+        buildCommands: 
+        - dotnet build --no-restore
